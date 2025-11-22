@@ -1,6 +1,10 @@
 @echo off
 setlocal enabledelayedexpansion
 
+REM License: MIT — see LICENSE in project root
+REM Copyright (c) 2025 yi-ye-zhi-qiu
+REM SPDX-License-Identifier: MIT
+
 echo.
 echo 🚀 Aiutante AI Code Assistant - Startup Script
 echo ================================================
