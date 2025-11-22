@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aiutante - AI Code Assistant Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="login-container" id="loginContainer">
+            <div class="logo-section">
+                <div class="logo">🤖</div>
+                <h1>Aiutante</h1>
+                <p class="tagline">AI-Powered Code Assistant</p>
+            </div>
+
+            <div class="tabs">
+                <button class="tab-btn active" onclick="switchTab('login')">Login</button>
+                <button class="tab-btn" onclick="switchTab('signup')">Sign Up</button>
+            </div>
+
+            <!-- Login Tab -->
+            <div id="loginTab" class="tab-content active">
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="loginEmail">Email</label>
+                        <input type="email" id="loginEmail" placeholder="your.email@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+                <div class="help-text">
+                    Don't have an account? <a href="#" onclick="switchTab('signup'); return false;">Sign up here</a>
+                </div>
+            </div>
+
+            <!-- Signup Tab -->
+            <div id="signupTab" class="tab-content">
+                <form id="signupForm">
+                    <div class="form-group">
+                        <label for="signupName">Full Name</label>
+                        <input type="text" id="signupName" placeholder="Your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupEmail">Email</label>
+                        <input type="email" id="signupEmail" placeholder="your.email@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupPassword">Password</label>
+                        <input type="password" id="signupPassword" placeholder="Create a password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupApiKey">OpenAI API Key</label>
+                        <input type="password" id="signupApiKey" placeholder="sk-..." required>
+                        <small>Get your API key from <a href="https://platform.openai.com/api-keys" target="_blank">OpenAI</a></small>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Create Account</button>
+                </form>
+            </div>
+
+            <div class="divider">OR</div>
+
+            <!-- API Key Login -->
+            <form id="apiKeyForm" class="api-key-form">
+                <div class="form-group">
+                    <label for="apiKeyName">Display Name</label>
+                    <input type="text" id="apiKeyName" placeholder="Your name" required>
+                </div>
+                <div class="form-group">
+                    <label for="apiKeyEmail">Email</label>
+                    <input type="email" id="apiKeyEmail" placeholder="your.email@example.com">
+                </div>
+                <div class="form-group">
+                    <label for="apiKey">OpenAI API Key</label>
+                    <input type="password" id="apiKey" placeholder="sk-..." required>
+                </div>
+                <button type="submit" class="btn btn-secondary">Login with API Key</button>
+            </form>
+        </div>
+
+        <div class="dashboard-container hidden" id="dashboardContainer">
+            <header class="header">
+                <div class="header-left">
+                    <h1>Welcome, <span id="userName">User</span></h1>
+                    <p id="userEmail"></p>
+                </div>
+                <div class="header-right">
+                    <button class="btn btn-secondary" onclick="logout()">Logout</button>
+                </div>
+            </header>
+
+            <main class="dashboard-content">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">💾</div>
+                        <div class="stat-name">API Key</div>
+                        <div class="stat-value" id="apiKeyStatus">✓ Connected</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📅</div>
+                        <div class="stat-name">Member Since</div>
+                        <div class="stat-value" id="createdDate">-</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🚀</div>
+                        <div class="stat-name">Last Active</div>
+                        <div class="stat-value" id="lastActive">Now</div>
+                    </div>
+                </div>
+
+                <section class="settings-section">
+                    <h2>Account Settings</h2>
+                    <div class="settings-form">
+                        <div class="form-group">
+                            <label for="displayName">Display Name</label>
+                            <input type="text" id="displayName" placeholder="Your display name">
+                        </div>
+                        <div class="form-group">
+                            <label for="userApiKey">OpenAI API Key</label>
+                            <input type="password" id="userApiKey" placeholder="sk-...">
+                            <small>Update your API key if needed</small>
+                        </div>
+                        <button class="btn btn-primary" onclick="updateUserSettings()">Save Changes</button>
+                    </div>
+                </section>
+
+                <section class="info-section">
+                    <h2>Extension Integration</h2>
+                    <div class="info-box">
+                        <h3>How to Connect Your Extension</h3>
+                        <ol>
+                            <li>Open VS Code with Aiutante extension installed</li>
+                            <li>Run command: <code>Extension.login</code></li>
+                            <li>Enter your email and API key from this dashboard</li>
+                            <li>Start using AI features immediately!</li>
+                        </ol>
+                    </div>
+                </section>
+
+                <section class="info-section">
+                    <h2>Features</h2>
+                    <div class="features-grid">
+                        <div class="feature-item">
+                            <div class="feature-icon">✨</div>
+                            <h3>Generate Code</h3>
+                            <p>Describe code and let AI generate it for you</p>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">🔧</div>
+                            <h3>Fix Code</h3>
+                            <p>Automatically fix bugs in your code</p>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">✅</div>
+                            <h3>Check Errors</h3>
+                            <p>Analyze code for potential issues</p>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">🔍</div>
+                            <h3>Code Review</h3>
+                            <p>Get comprehensive code analysis</p>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <div class="notification" id="notification"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

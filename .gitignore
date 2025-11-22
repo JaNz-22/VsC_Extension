@@ -1,0 +1,55 @@
+# Dependencies
+node_modules/
+web-dashboard/node_modules/
+
+# Build outputs
+out/
+dist/
+*.vsix
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Runtime data
+pids/
+*.pid
+*.seed
+
+# OS files
+.DS_Store
+Thumbs.db
+.Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.vs/
+*.code-workspace
+
+# Node version managers
+.nvmrc
+.node-version
+
+# Temporary files
+.cache/
+.temp/
+tmp/
+
+# Database (if using file-based storage)
+*.db
+*.sqlite
+
+# Testing
+coverage/
+.mocha

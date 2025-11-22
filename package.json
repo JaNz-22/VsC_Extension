@@ -1,0 +1,191 @@
+{
+  "name": "aiutante",
+  "displayName": "Aiutante",
+  "description": "An AI-powered VS Code extension for code generation, fixing, and error checking.",
+  "version": "0.0.1",
+  "publisher": "yi-ye-zhi-qiu",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JaNz-22/VSC_Extension.git"
+  },
+  "bugs": {
+    "url": "https://github.com/JaNz-22/VSC_Extension/issues"
+  },
+  "homepage": "https://github.com/JaNz-22/VSC_Extension/blob/main/README.md",
+  "license": "MIT",
+  "keywords": [
+    "AI",
+    "code-generation",
+    "code-fixing",
+    "error-checking",
+    "openai",
+    "assistant"
+  ],
+  "engines": {
+    "vscode": "^1.60.0"
+  },
+  "activationEvents": [
+    "onCommand:extension.helloWorld",
+    "onCommand:extension.generateCode",
+    "onCommand:extension.fixCode",
+    "onCommand:extension.checkErrors",
+    "onCommand:extension.codeReview",
+    "onCommand:extension.login",
+    "onCommand:extension.dashboard",
+    "onCommand:extension.chat"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "extension.helloWorld",
+        "title": "Hello World"
+      },
+      {
+        "command": "extension.generateCode",
+        "title": "Generate Code"
+      },
+      {
+        "command": "extension.fixCode",
+        "title": "Fix Code"
+      },
+      {
+        "command": "extension.checkErrors",
+        "title": "Check Errors"
+      },
+      {
+        "command": "extension.codeReview",
+        "title": "Code Review"
+      },
+      {
+        "command": "extension.login",
+        "title": "Login to AI Service"
+      },
+      {
+        "command": "extension.dashboard",
+        "title": "Open AI Dashboard"
+      },
+      {
+        "command": "extension.chat",
+        "title": "Open AI Chat"
+      }
+    ],
+    "configuration": {
+      "title": "AI Code Assistant",
+      "properties": {
+        "aiExtension.openaiApiKey": {
+          "type": "string",
+          "default": "",
+          "description": "Your OpenAI API key for AI-powered features"
+        },
+        "aiExtension.isLoggedIn": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether you are logged in to the AI service"
+        },
+        "aiExtension.model": {
+          "type": "string",
+          "default": "gpt-3.5-turbo",
+          "enum": [
+            "gpt-3.5-turbo",
+            "gpt-4",
+            "gpt-4-turbo-preview"
+          ],
+          "enumDescriptions": [
+            "Fast and cost-effective for most tasks",
+            "More capable but slower and more expensive",
+            "Latest GPT-4 Turbo model with improved performance"
+          ],
+          "description": "OpenAI model to use for AI operations"
+        },
+        "aiExtension.temperature": {
+          "type": "number",
+          "default": 0.7,
+          "minimum": 0,
+          "maximum": 2,
+          "description": "Controls randomness in AI responses (0 = deterministic, 2 = very random)"
+        },
+        "aiExtension.maxTokens": {
+          "type": "number",
+          "default": 2000,
+          "minimum": 100,
+          "maximum": 4000,
+          "description": "Maximum number of tokens in AI responses"
+        },
+        "aiExtension.enableCodeReview": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable the code review feature"
+        },
+        "aiExtension.enableErrorChecking": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable the error checking feature"
+        },
+        "aiExtension.userEmail": {
+          "type": "string",
+          "default": "",
+          "description": "User email for account management"
+        },
+        "aiExtension.userName": {
+          "type": "string",
+          "default": "",
+          "description": "User display name"
+        },
+        "aiExtension.usageStats": {
+          "type": "object",
+          "default": {},
+          "description": "Usage statistics for analytics"
+        }
+      }
+    },
+    "menus": {
+      "editor/context": [
+        {
+          "command": "extension.generateCode",
+          "group": "1_modification"
+        },
+        {
+          "command": "extension.fixCode",
+          "group": "1_modification"
+        },
+        {
+          "command": "extension.checkErrors",
+          "group": "1_modification"
+        },
+        {
+          "command": "extension.codeReview",
+          "group": "1_modification"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "webpack --mode production",
+    "compile": "webpack --mode development",
+    "watch": "webpack --mode development --watch",
+    "pretest": "webpack --mode development",
+    "test": "mocha --require ts-node/register src/test/suite/extension.test.ts",
+    "test:vscode": "node ./out/test/runTest.js",
+    "watch-tests": "tsc -watch -p ."
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/sinon": "^17.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.46.3",
+    "@typescript-eslint/parser": "^8.46.3",
+    "eslint": "^8.57.1",
+    "mocha": "^10.2.0",
+    "sinon": "^18.0.0",
+    "ts-loader": "^8.0.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.0.0",
+    "vscode": "^1.1.37",
+    "vscode-test": "^1.0.0",
+    "webpack": "^5.0.0",
+    "webpack-cli": "^4.0.0"
+  },
+  "dependencies": {
+    "axios": "^1.6.0"
+  }
+}
