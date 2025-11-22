@@ -1,8 +1,5 @@
-;
 const assert = require('assert');
-;
 const sinon = require('sinon');
-;
 const vscode = require('vscode');
 const { helloCommand  } = require('../../commands/helloCommand');
 const { generateCode  } = require('../../commands/generateCode');
@@ -12,9 +9,9 @@ const { loginCommand  } = require('../../commands/loginCommand');
 const { callAI, getApiKey  } = require('../../services/apiService');
 
 suite('Extension Tests', () => {
-    let sandbox: sinon.SinonSandbox;
-    let mockWindow: sinon.SinonStubbedInstance<typeof vscode.window>;
-    let mockWorkspace: sinon.SinonStubbedInstance<typeof vscode.workspace>;
+    let sandbox;
+    let mockWindow;
+    let mockWorkspace;
 
     setup(() => {
         sandbox = sinon.createSandbox();
@@ -55,7 +52,7 @@ suite('Extension Tests', () => {
                 selection: { active: { line: 0, character: 0 } },
                 edit: sandbox.stub().resolves()
             };
-            mockWindow.activeTextEditor = mockEditor as any;
+            mockWindow.activeTextEditor = mockEditor;
             mockWindow.showInputBox.resolves(undefined);
 
             await generateCode();
@@ -69,7 +66,7 @@ suite('Extension Tests', () => {
                 selection: { active: { line: 0, character: 0 } },
                 edit: sandbox.stub().resolves()
             };
-            mockWindow.activeTextEditor = mockEditor as any;
+            mockWindow.activeTextEditor = mockEditor;
             mockWindow.showInputBox.resolves('Create a function to add two numbers');
             mockWindow.showInformationMessage.resolves();
 
@@ -90,7 +87,7 @@ suite('Extension Tests', () => {
                 selection: { active: { line: 0, character: 0 } },
                 edit: sandbox.stub().resolves()
             };
-            mockWindow.activeTextEditor = mockEditor as any;
+            mockWindow.activeTextEditor = mockEditor;
             mockWindow.showInputBox.resolves('Create a function');
             mockWindow.showErrorMessage.resolves();
 
@@ -118,7 +115,7 @@ suite('Extension Tests', () => {
                 selection: { isEmpty: true },
                 document: { getText: sandbox.stub().returns('') }
             };
-            mockWindow.activeTextEditor = mockEditor as any;
+            mockWindow.activeTextEditor = mockEditor;
             mockWindow.showErrorMessage.resolves();
 
             await fixCode();
@@ -132,7 +129,7 @@ suite('Extension Tests', () => {
                 document: { getText: sandbox.stub().returns('buggy code') },
                 edit: sandbox.stub().resolves()
             };
-            mockWindow.activeTextEditor = mockEditor as any;
+            mockWindow.activeTextEditor = mockEditor;
             mockWindow.showInformationMessage.resolves();
 
             sandbox.stub(require('../../services/apiService'), 'getApiKey').resolves('test-key');
@@ -164,8 +161,8 @@ suite('Extension Tests', () => {
             const mockPanel = {
                 webview: { html: '' }
             };
-            mockWindow.activeTextEditor = mockEditor as any;
-            mockWindow.createWebviewPanel.returns(mockPanel as any);
+            mockWindow.activeTextEditor = mockEditor;
+            mockWindow.createWebviewPanel.returns(mockPanel);
             mockWindow.showInformationMessage.resolves();
 
             sandbox.stub(require('../../services/apiService'), 'getApiKey').resolves('test-key');
@@ -183,7 +180,7 @@ suite('Extension Tests', () => {
             const mockPanel = {
                 webview: { html: '', onDidReceiveMessage: sandbox.stub() }
             };
-            mockWindow.createWebviewPanel.returns(mockPanel as any);
+            mockWindow.createWebviewPanel.returns(mockPanel);
 
             loginCommand();
 
